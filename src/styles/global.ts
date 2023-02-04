@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { lightGray } from "./color";
 
 export default createGlobalStyle`
 /* Remove default margin */
@@ -83,11 +84,22 @@ select {
   max-width: 730px;
 }
 
+.sr-only {
+  position: absolute;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  padding: 0;
+  margin: -0.0625rem;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
 body {
   min-height: 100vh;
   line-height: 1.3;
   text-rendering: optimizeSpeed;
-  background-color: gray;
+  background-color: ${lightGray};
   color: white;
   font-family: 'Space Mono', monospace;
   display: flex;

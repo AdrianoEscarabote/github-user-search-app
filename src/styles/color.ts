@@ -6,6 +6,8 @@ export const darkBlue: string = "#4B6A9B";
 export const darkGray: string = "#0079FF";
 export const lightGray: string = "#F6F8FF";
 export const white: string = "#FEFEFE";
+export const nameColor: string = "#222731";
+export const profileNameColor: string = "#2B3442";
 
 // dark mode colors
 
