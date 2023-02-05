@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { darkBlue, darkGray, nameColor } from "./color";
 import iconMoon from "../assets/icon-moon.svg";
 
-export const HeaderStyled = styled.header`
+export const TopStyled = styled.div`
   .container {
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@ export const HeaderStyled = styled.header`
       }
     }
 
-    nav {
+    .form {
       background: #FEFEFE;
       box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
       border-radius: 15px;
