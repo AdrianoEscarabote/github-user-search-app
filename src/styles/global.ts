@@ -1,7 +1,11 @@
 import { createGlobalStyle } from "styled-components";
-import { lightGray } from "./color";
 
-export default createGlobalStyle`
+export interface DefaultTheme {
+  body: string,
+  text: string
+}
+
+export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
 /* Remove default margin */
 body,
 h1,
@@ -82,6 +86,7 @@ select {
 #root {
   width: 100%;
   max-width: 730px;
+  margin-bottom: 26px;
 }
 
 .sr-only {
@@ -99,10 +104,18 @@ body {
   min-height: 100vh;
   line-height: 1.3;
   text-rendering: optimizeSpeed;
-  background-color: ${lightGray};
-  color: white;
+  // @ts-ignore
+  background-color: ${({ theme }) => theme.body};
+  // @ts-ignore
+  color: ${({ theme }) => theme.text};
   font-family: 'Space Mono', monospace;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 750px) {
+  body {
+    padding: 15px;
+  }
 }`;

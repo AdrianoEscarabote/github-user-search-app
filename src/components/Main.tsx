@@ -4,16 +4,7 @@ import imgTwitter from "../assets/icon-twitter.svg";
 import imgWebSite from "../assets/icon-website.svg";
 import imgCompany from "../assets/icon-company.svg";
 import { TopStyled } from "../styles/MainTopContent";
-
 import { FormEventHandler, FunctionComponent, ReactNode, useEffect, useState } from "react";
-/* 
-interface ButtonProps {
-  onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
-}
-
-const Button: FunctionComponent<ButtonProps> = ({ onClick }) => {
-  return (<button type="submit" onClick={onClick}>Search</button>)
-} */
 
 interface FormProps {
   onSubmit: FormEventHandler<HTMLFormElement> | undefined,
@@ -21,15 +12,15 @@ interface FormProps {
 }
 
 interface InputProps {
-  value: string,
-  name: string,
-  placeholder: string,
-  id: string,
+  value?: string,
+  name?: string,
+  placeholder?: string,
+  id?: string,
   onChange: React.ChangeEventHandler<HTMLInputElement> | undefined,
 }
 
 const InputText: FunctionComponent<InputProps> = ({ onChange }) => {
-  return (<input onChange={onChange} type="text"/>) 
+  return (<input onChange={onChange} placeholder="Search GitHub username..." name="name" id="name" type="text"/>) 
 }
 
 const Form: FunctionComponent<FormProps> = ({ onSubmit, children }) => {
@@ -52,16 +43,22 @@ interface Data {
   repos: string | undefined, 
   followers: number | string,
   following: number | string,
+  description: string,
 };
 
-export default function Main () {
+interface MainProps {
+  themeToggler: () => void,
+}
 
+export const Main: FunctionComponent<MainProps> = ({ themeToggler }) => {
+  
   const [about, setAbout] = useState<About>({
     company: "",
     location: "",
     twitter: "",
-    website: ""
+    website: "",
   });
+
   const [data, setData] = useState<Data>({
     followers: "",
     following: "", 
@@ -69,9 +66,10 @@ export default function Main () {
     login: "",
     name: "",
     repos: "",
+    description: "",
   });
   
-  const [userName, setUserName] = useState<string>("AdrianoEscarabote");
+  const [userName, setUserName] = useState<string>("octocat");
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
@@ -100,19 +98,25 @@ export default function Main () {
           name: response.name,
           repos: response.public_repos
         }
-      })
-    }
+      });
+    };
 
-    getResponse()
-  }, [userName])
-  
+    getResponse();
+  }, [userName]);
+
+  const [currentTheme, setCurrentTheme] = useState<string>("DARK"); 
+
   return (
     <>
       <TopStyled>
+        <h1 className="sr-only">the dev finder</h1>
         <div className="container">
           <div className="top-content">
             <h2>devfinder</h2>
-            <button className="changeTheme"> dark <img src="" alt="" /> </button>
+            <button className="changeTheme" onClick={() => {
+              themeToggler() 
+              currentTheme === "LIGHT" ? setCurrentTheme("DARK") : setCurrentTheme("LIGHT")      
+            }}>{currentTheme}</button>
           </div>
           <div className="form">
             <Form onSubmit={(e) => {
@@ -126,12 +130,12 @@ export default function Main () {
                 <svg height="24" width="25" xmlns="http://www.w3.org/2000/svg"><path d="M10.609 0c5.85 0 10.608 4.746 10.608 10.58 0 2.609-.952 5-2.527 6.847l5.112 5.087a.87.87 0 01-1.227 1.233l-5.118-5.093a10.58 10.58 0 01-6.848 2.505C4.759 21.16 0 16.413 0 10.58 0 4.747 4.76 0 10.609 0zm0 1.74c-4.891 0-8.87 3.965-8.87 8.84 0 4.874 3.979 8.84 8.87 8.84a8.855 8.855 0 006.213-2.537l.04-.047a.881.881 0 01.058-.053 8.786 8.786 0 002.558-6.203c0-4.875-3.979-8.84-8.87-8.84z" fill="#0079ff"/></svg>
               </label>
               
-              <InputText placeholder="Search GitHub username..." name="name" id="name" value={inputValue} onChange={(e) => {
+              <InputText value={inputValue} onChange={(e) => {
                 setInputValue(e.currentTarget.value)
                 console.log(inputValue)
               }}/>
 
-              <button type="submit">Search</button>
+              <button aria-label="search user" type="submit">Search</button>
 
               </fieldset>
             </Form>
@@ -153,7 +157,7 @@ export default function Main () {
             </div>
 
             <p className="description">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.
+              {data.description ? data.description : 'This profile has no bio'}
             </p>
 
             <div className="statistic">

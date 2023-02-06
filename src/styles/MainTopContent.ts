@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { darkBlue, darkGray, nameColor } from "./color";
+import { darkGray, white } from "./color";
 import iconMoon from "../assets/icon-moon.svg";
 
 export const TopStyled = styled.div`
@@ -17,43 +17,56 @@ export const TopStyled = styled.div`
         font-weight: 700;
         font-size: 26px;
         line-height: 39px;
-        color: ${nameColor};
+        color: ${({ theme }) => theme.logoColor};
       }
 
       .changeTheme {
         background-color: white;
-        background: url(${iconMoon}) no-repeat;
+        background: url(${({ theme }) => theme.imgIconChangeTheme}) no-repeat;
         width: 100%;
         max-width: 90px;
         background-position: right;
-        color:#000;
+        &:focus {
+          outline: 2.5px dotted ${({ theme }) => theme.outline};
+        }
       }
     }
 
     .form {
-      background: #FEFEFE;
-      box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
+      background-color: ${({ theme }) => theme.backgroundMain}; 
+      box-shadow: ${({ theme }) => theme.boxShadowTop};
       border-radius: 15px;
       position: relative;
       height: 69px;
       display: flex; 
+      width: 100%;
       align-items: center;
       
       fieldset {
         border: transparent;
+        display: flex;
+        align-items: center;
+        padding: 16px 0px 10px 28px;
+        gap: 20px;
+
+        label {
+          cursor: pointer;
+        }
+
+        input {
+          background-color: transparent;
+          border: transparent;
+          width: 456px;
+          height: 25px;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 25px;
+          color: ${({theme}) => theme.text}; 
+          outline: transparent;
+          cursor: pointer;
+        }
       }
 
-
-      input {
-        background-color: transparent;
-        border: transparent;
-        width: 256px;
-        height: 25px;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 25px;
-        color: ${darkBlue};
-      }
 
       button {
         width: 100%;
@@ -65,7 +78,27 @@ export const TopStyled = styled.div`
         position: absolute;
         right: 10px;
         top: 10px;
+        color: ${white};
         border-radius: 10px;
+        &:hover,
+        &:focus {
+          background-color: ${({ theme }) => theme.buttonHover};
+          outline: 2.5px dotted ${({ theme }) => theme.outline};
+        }
+      }
+    }
+  }
+
+  @media (max-width: 750px) {
+    form {
+      fieldset {
+        gap: 10px !Important;
+        padding: 16px 0px 10px 20px !Important;
+
+        input {
+          width: 100% !Important;
+          max-width: 150px;
+        }
       }
     }
   }

@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { blue, darkBlue, gray, lightGray, profileNameColor, white } from "./color";
+import { blue } from "./color";
 
-export const MainStyled = styled.main`
-  background-color: ${white}; 
+export const MainStyled = styled.div`
+  background-color: ${({ theme }) => theme.backgroundMain}; 
   height: 419px;
-  box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
+  box-shadow: ${({ theme }) => theme.boxShadowMain};
   border-radius: 15px;
   
   .details {
@@ -14,73 +14,84 @@ export const MainStyled = styled.main`
     gap: 10px;
     padding: 48px;
 
-    .image-profile img {
-      border-radius: 50%;
-      margin-top: -4px;
+    .image-profile {
+      display: grid;
+      grid-column: 1;
+      .img {
+        border-radius: 50%;
+        margin: -4px 10px 0px 0px;
+        width: 117px;
+      }
+    }
+
+    .infos {
+      display: grod;
+      position: relative;
+      width: 100%;
+      padding-bottom: 20px;
+      .info {
+        display: flex;
+        flex-direction: column;
+        h2 {
+          font-weight: 700;
+          font-size: 26px;
+          line-height: 39px;
+          color: ${({ theme }) => theme.nameColor};
+        }
+        .user {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          color: ${blue};
+        }
+      }
+      .joined {
+        position: absolute;
+        right: 0px;
+        top: 10px; 
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 22px;
+        color: ${({theme}) => theme.joinedColor}; 
+      }
     }
 
     .container {
-      padding: 10px;
-      .infos {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: space-between;
-        padding-bottom: 20px;
-        .info {
-          display: flex;
-          flex-direction: column;
-          h2 {
-            font-weight: 700;
-            font-size: 26px;
-            line-height: 39px;
-            color: ${profileNameColor};
-          }
-          .user {
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 24px;
-            color: ${blue};
-          }
-        }
-        .joined {
-          font-weight: 400;
-          font-size: 15px;
-          line-height: 22px;
-          color: ${gray}; 
-        }
-      }
-  
+      padding: 0px 0px 10px 10px;
+      margin-top: -8px;
+      grid-column: 2;
+      
       .description {
         width: 100%;
         font-weight: 400;
         font-size: 15px;
         line-height: 25px;
-        color: ${darkBlue}; 
         padding-bottom: 20px;
       }
   
       .statistic {
-        background: ${lightGray};
+        background: ${({ theme }) => theme.statistic};
         width: 100%;
         height: 85px;
         border-radius: 10px;
         display: flex;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: space-around;
+        gap: 20%;
+        /* margin-left: 34px;
+        margin-top: 14px; */
         p {
           display: flex;
           flex-direction: column;
           font-weight: 400;
           font-size: 13px;
           line-height: 19px;
-          color: ${darkBlue};
   
           span {
             font-weight: 700;
             font-size: 22px;
             line-height: 33px;
-            color: ${profileNameColor};
+            color:  ${({ theme }) => theme.nameColor};
           }
         }
       }
@@ -90,26 +101,101 @@ export const MainStyled = styled.main`
         grid-template-columns: 50% 50%;
         flex-wrap: wrap;
         margin-top: 37px;
-        gap: 30px 37px;
+        gap: 20px 37px;
         div {
           display: flex;
           align-items: center;
           gap: 20px;
+
+          img {
+            filter: ${({ theme }) => theme.filterIcons};
+          }
+
           p {
             font-weight: 400;
             font-size: 15px;
             line-height: 22px;
-            color: ${darkBlue};
           }
           a {
             font-weight: 400;
             font-size: 15px;
             line-height: 22px;
-            text-decoration-line: underline;
-            color: ${darkBlue};
+            text-decoration-line: none;
+            color: unset;
+            &:hover,
+            &:focus {
+              text-decoration: underline;
+              background-color: ${({ theme }) => theme.buttonHover};
+              outline: 2.5px dotted ${({ theme }) => theme.outline};
+            }
           }
         }
       }
+    }
+  }
+
+  @media (max-width: 750px) {
+    height: auto;
+
+    .details {
+      grid-template-columns: 100%;
+      place-content: center;
+      padding: 28px;
+
+
+      .image-profile {
+        position: absolute;
+        width: 70px;
+        height: 70px;
+        margin: 10px 0px 0px 10px;
+      }
+
+      .container1 {
+        display: flex;
+        gap: 20px;
+      }
+      .infos {
+        position: relative;
+        left: 100px;
+        width: 180px;
+        flex-direction: column;
+        align-items: flex-start;
+
+        h2 {
+          word-break: normal;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 24px;
+        }
+        .joined {
+          position: initial;
+        }
+      }
+    }
+
+    .container {
+      position: relative;
+      overflow: hidden;
+      padding: 0px !Important;
+      .description {
+        margin-top: 30px;
+      }
+      grid-column: 1 !important;
+      .statistic {
+        margin: 0px !Important;
+        justify-content: center !Important;
+        gap: 8% !Important;
+      }
+      .about {
+        display: flex !Important;
+        flex-wrap: wrap:
+      }
+    }
+  }
+
+  @media (max-width: 420px) {
+    .details {
+      padding: 12px;
     }
   }
 `
