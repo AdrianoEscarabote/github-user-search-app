@@ -87,6 +87,7 @@ select {
   width: 100%;
   max-width: 45.625rem;
   margin-bottom: 1.625rem;
+  animation: mainAnimation 0.4s ease-in-out;
 }
 
 .sr-only {
@@ -118,4 +119,17 @@ body {
   body {
     padding: 0.9375rem;
   }
-}`;
+}
+
+@media(min-width: 43.75rem) {
+  @keyframes mainAnimation {
+    from {
+      opacity: 0;
+      transform: translateY(-10%);
+    } to {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+}
+`;
