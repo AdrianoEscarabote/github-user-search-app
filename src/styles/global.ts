@@ -85,8 +85,8 @@ select {
 
 #root {
   width: 100%;
-  max-width: 730px;
-  margin-bottom: 26px;
+  max-width: 45.625rem;
+  margin-bottom: 1.625rem;
 }
 
 .sr-only {
@@ -114,8 +114,8 @@ body {
   justify-content: center;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 46.875rem) {
   body {
-    padding: 15px;
+    padding: 0.9375rem;
   }
 }`;

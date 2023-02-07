@@ -4,7 +4,7 @@ import imgTwitter from "../assets/icon-twitter.svg";
 import imgWebSite from "../assets/icon-website.svg";
 import imgCompany from "../assets/icon-company.svg";
 import { TopStyled } from "../styles/MainTopContent";
-import { FormEventHandler, FunctionComponent, ReactNode, useEffect, useState } from "react";
+import { FormEventHandler, FunctionComponent, ReactNode, useEffect,useState } from "react";
 
 interface FormProps {
   onSubmit: FormEventHandler<HTMLFormElement> | undefined,
@@ -34,6 +34,7 @@ interface About {
   website?:  string | undefined,
   location?: string | undefined,
   twitter?: string | undefined,
+  date?: string | undefined
 };
 
 interface Data {
@@ -57,6 +58,7 @@ export const Main: FunctionComponent<MainProps> = ({ themeToggler }) => {
     location: "",
     twitter: "",
     website: "",
+    date: ""
   });
 
   const [data, setData] = useState<Data>({
@@ -70,41 +72,52 @@ export const Main: FunctionComponent<MainProps> = ({ themeToggler }) => {
   });
   
   const [userName, setUserName] = useState<string>("octocat");
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string>("");
+  const [classError, setClassError] = useState<string>("")
 
   useEffect(() => {
-    var dataISODataHora = new Date("2011-01-25T18:44:36Z").toLocaleString()
-
-    console.log(dataISODataHora)
-
     const getResponse = async () => {
       const response = await (await fetch(`https://api.github.com/users/${userName}`)).json()
-      setAbout(prevState => {
-        return {
-          ...prevState,
-          company: response.company,
-          location: response.location,
-          twitter: response.twitter_username,
-          website: response.blog,
-        }
-      });
-      setData(prevState => {
-        return {
-          ...prevState,
-          followers: response.followers,
-          following: response.following,
-          img: response.avatar_url,
-          login: response.login,
-          name: response.name,
-          repos: response.public_repos
-        }
-      });
-    };
+      
+      if (response.message === "Not Found") {
+        setClassError("active")
+      } else {
+        setClassError("")
+        const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul","Ago","Set","Out","Nov","Dez"];
+    
+        const dataDay = new Date(`${response.created_at}`).getDate()
+        const dataMonth = new Date(`${response.created_at}`).getMonth()
+        const dataYear = new Date(`${response.created_at}`).getFullYear()
+    
+        const formattedDate = `${dataDay} ${months[dataMonth]}  ${dataYear}`
 
+        setAbout(prevState => {
+          return {
+            ...prevState,
+            company: response.company,
+            location: response.location,
+            twitter: response.twitter_username,
+            website: response.blog,
+            date: `Joined ${formattedDate}`
+          }
+        });
+        setData(prevState => {
+          return {
+            ...prevState,
+            followers: response.followers,
+            following: response.following,
+            img: response.avatar_url,
+            login: response.login,
+            name: response.name,
+            repos: response.public_repos
+          }
+        });
+      }
+    };
     getResponse();
   }, [userName]);
 
-  const [currentTheme, setCurrentTheme] = useState<string>("DARK"); 
+  const [currentTheme, setCurrentTheme] = useState<string>("LIGHT"); 
 
   return (
     <>
@@ -112,7 +125,7 @@ export const Main: FunctionComponent<MainProps> = ({ themeToggler }) => {
         <h1 className="sr-only">the dev finder</h1>
         <div className="container">
           <div className="top-content">
-            <h2>devfinder</h2>
+            <a href="/" aria-label="main-app">devfinder</a>
             <button className="changeTheme" onClick={() => {
               themeToggler() 
               currentTheme === "LIGHT" ? setCurrentTheme("DARK") : setCurrentTheme("LIGHT")      
@@ -135,6 +148,8 @@ export const Main: FunctionComponent<MainProps> = ({ themeToggler }) => {
                 console.log(inputValue)
               }}/>
 
+              <span id="err" className={classError}>No results</span>
+
               <button aria-label="search user" type="submit">Search</button>
 
               </fieldset>
@@ -153,7 +168,7 @@ export const Main: FunctionComponent<MainProps> = ({ themeToggler }) => {
                 <h2 className="name">{data.name ? data.name : "Not Available"}</h2>
                 <p className="user">{data.login ? `@${data.login}` : "Not Available"}</p>
               </div>
-              <p className="joined">Joined 25 jan 2011</p>
+              <p className="joined">{about.date ? about.date : "Joined 25 jan 2011"}</p>
             </div>
 
             <p className="description">

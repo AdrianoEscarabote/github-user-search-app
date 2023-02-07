@@ -3,24 +3,24 @@ import { blue } from "./color";
 
 export const MainStyled = styled.div`
   background-color: ${({ theme }) => theme.backgroundMain}; 
-  height: 419px;
+  height: 26.1875rem;
   box-shadow: ${({ theme }) => theme.boxShadowMain};
-  border-radius: 15px;
+  border-radius: 0.9375rem;
   
   .details {
     display: grid;
-    grid-template-columns: 127px 490px;
+    grid-template-columns: 7.9375rem 30.625rem;
     place-content: center;
-    gap: 10px;
-    padding: 48px;
+    gap: 0.875rem;
+    padding: 3rem;
 
     .image-profile {
       display: grid;
       grid-column: 1;
       .img {
         border-radius: 50%;
-        margin: -4px 10px 0px 0px;
-        width: 117px;
+        margin: -0.25rem 0.625rem 0rem -0.25rem;
+        width: 7.3125rem;
       }
     }
 
@@ -28,70 +28,74 @@ export const MainStyled = styled.div`
       display: grod;
       position: relative;
       width: 100%;
-      padding-bottom: 20px;
+      padding-bottom: 1.25rem;
       .info {
         display: flex;
         flex-direction: column;
         h2 {
           font-weight: 700;
-          font-size: 26px;
-          line-height: 39px;
+          font-size: 1.625rem;
+          line-height: 2.4375rem;
           color: ${({ theme }) => theme.nameColor};
         }
         .user {
           font-weight: 400;
-          font-size: 16px;
-          line-height: 24px;
+          font-size: 1rem;
+          line-height: 1.5rem;
           color: ${blue};
         }
       }
       .joined {
         position: absolute;
-        right: 0px;
-        top: 10px; 
+        right: 0rem;
+        top: 0.625rem; 
         font-weight: 400;
-        font-size: 15px;
-        line-height: 22px;
+        font-size: 0.9375rem;
+        line-height: 1.375rem;
         color: ${({theme}) => theme.joinedColor}; 
       }
     }
 
     .container {
-      padding: 0px 0px 10px 10px;
-      margin-top: -8px;
+      padding: 0rem 0rem 0.625rem 0.625rem;
+      margin-top: -0.5rem;
       grid-column: 2;
       
       .description {
         width: 100%;
         font-weight: 400;
-        font-size: 15px;
-        line-height: 25px;
-        padding-bottom: 20px;
+        font-size: 0.9375rem;
+        line-height: 1.5625rem;
+        padding-bottom: 1.25rem;
       }
   
       .statistic {
         background: ${({ theme }) => theme.statistic};
         width: 100%;
-        height: 85px;
-        border-radius: 10px;
+        height: 5.3125rem;
+        border-radius: 0.625rem;
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: flex-start;
         gap: 20%;
-        /* margin-left: 34px;
-        margin-top: 14px; */
+        margin-top: 0.75rem;
+
+        .repos {
+          padding-left: 2.125rem;
+        }
+
         p {
           display: flex;
           flex-direction: column;
           font-weight: 400;
-          font-size: 13px;
-          line-height: 19px;
+          font-size: 0.8125rem;
+          line-height: 1.1875rem;
   
           span {
             font-weight: 700;
-            font-size: 22px;
-            line-height: 33px;
-            color:  ${({ theme }) => theme.nameColor};
+            font-size: 1.375rem;
+            line-height: 2.0625rem;
+            color: ${({ theme }) => theme.nameColor};
           }
         }
       }
@@ -100,12 +104,12 @@ export const MainStyled = styled.div`
         display: grid;
         grid-template-columns: 50% 50%;
         flex-wrap: wrap;
-        margin-top: 37px;
-        gap: 20px 37px;
+        margin-top: 2.3125rem;
+        gap: 1.25rem 2.3125rem;
         div {
           display: flex;
           align-items: center;
-          gap: 20px;
+          gap: 1.25rem;
 
           img {
             filter: ${({ theme }) => theme.filterIcons};
@@ -113,20 +117,20 @@ export const MainStyled = styled.div`
 
           p {
             font-weight: 400;
-            font-size: 15px;
-            line-height: 22px;
+            font-size: 0.9375rem;
+            line-height: 1.375rem;
           }
           a {
             font-weight: 400;
-            font-size: 15px;
-            line-height: 22px;
+            font-size: 0.9375rem;
+            line-height: 1.375rem;
             text-decoration-line: none;
             color: unset;
             &:hover,
             &:focus {
               text-decoration: underline;
               background-color: ${({ theme }) => theme.buttonHover};
-              outline: 2.5px dotted ${({ theme }) => theme.outline};
+              outline: 0.1563rem dotted ${({ theme }) => theme.outline};
             }
           }
         }
@@ -134,38 +138,38 @@ export const MainStyled = styled.div`
     }
   }
 
-  @media (max-width: 750px) {
+  @media (max-width: 46.875rem) {
     height: auto;
 
     .details {
       grid-template-columns: 100%;
       place-content: center;
-      padding: 28px;
+      padding: 1.75rem;
 
 
       .image-profile {
         position: absolute;
-        width: 70px;
-        height: 70px;
-        margin: 10px 0px 0px 10px;
+        width: 4.375rem;
+        height: 4.375rem;
+        margin: 0.625rem 0rem 0rem 0.625rem;
       }
 
       .container1 {
         display: flex;
-        gap: 20px;
+        gap: 1.25rem;
       }
       .infos {
         position: relative;
-        left: 100px;
-        width: 180px;
+        left: 6.25rem;
+        width: 11.25rem;
         flex-direction: column;
         align-items: flex-start;
 
         h2 {
           word-break: normal;
           font-weight: 700;
-          font-size: 16px;
-          line-height: 24px;
+          font-size: 1rem;
+          line-height: 1.5rem;
         }
         .joined {
           position: initial;
@@ -176,13 +180,13 @@ export const MainStyled = styled.div`
     .container {
       position: relative;
       overflow: hidden;
-      padding: 0px !Important;
+      padding: 0rem !Important;
       .description {
-        margin-top: 30px;
+        margin-top: 1.875rem;
       }
       grid-column: 1 !important;
       .statistic {
-        margin: 0px !Important;
+        margin: 0rem !Important;
         justify-content: center !Important;
         gap: 8% !Important;
       }
@@ -193,9 +197,9 @@ export const MainStyled = styled.div`
     }
   }
 
-  @media (max-width: 420px) {
+  @media (max-width: 26.25rem) {
     .details {
-      padding: 12px;
+      padding: 0.75rem;
     }
   }
 `
