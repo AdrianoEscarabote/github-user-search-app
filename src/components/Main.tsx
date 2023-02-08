@@ -198,14 +198,17 @@ export const Main: FunctionComponent<MainProps> = ({ themeToggler }) => {
                 <img src={imgLocation} alt="" aria-hidden="true"/>
                 <p>{about.location ? about.location : "Not Available"}</p>
               </div>
+
               <div className="tt">
                 <img src={imgTwitter} alt="" aria-hidden="true" />
-                <p>{about.twitter ? about.twitter : "Not Available"}</p>
+                <a target="_blank" href={about.twitter ? `https://twitter.com/${about.twitter}` : ""} aria-label={about.twitter ? "go to twitter" : ""} aria-disabled={about.twitter ? "false" : "true"} className={about.twitter ? "link" : "link-disabled"}>{about.twitter ? about.twitter : "Not Available"}</a>
               </div>
+
               <div className="website">
                 <img src={imgWebSite} alt="" aria-hidden="true" />
-                <a href={about.website ? about.website : ""} aria-label="go to website">{about.website ? about.website : "Not Available"}</a>
+                <a className={about.website ? "link" : "link-disabled"} target="_blank" href={about.website ? about.website : ""} aria-label={about.website ? "go to website" : ""} aria-disabled={about.website ? "false" : "true"}>{about.website ? about.website : "Not Available"}</a>
               </div>
+              
               <div className="company">
                 <img src={imgCompany} alt="" aria-hidden="true" />
                 <p>{about.company ? about.company : "Not Available"}</p>

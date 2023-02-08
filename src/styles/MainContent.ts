@@ -197,6 +197,10 @@ export const MainStyled = styled.div`
     }
   }
 
+  .link-disabled {
+    pointer-events: none;
+  }
+
   @media (max-width: 26.25rem) {
     .details {
       padding: 0.75rem;
